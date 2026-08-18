@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as ProjectsIdRouteImport } from './routes/projects.$id'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -30,6 +31,11 @@ const AboutRoute = AboutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestimonialsRoute = TestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/testimonials': typeof TestimonialsRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/testimonials': typeof TestimonialsRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects': typeof ProjectsIndexRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/testimonials': typeof TestimonialsRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/testimonials'
     | '/projects/$id'
     | '/services/$slug'
     | '/projects/'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/testimonials'
     | '/projects/$id'
     | '/services/$slug'
     | '/projects'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/testimonials'
     | '/projects/$id'
     | '/services/$slug'
     | '/projects/'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  TestimonialsRoute: typeof TestimonialsRoute
   ProjectsIdRoute: typeof ProjectsIdRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/testimonials': {
+      id: '/testimonials'
+      path: '/testimonials'
+      fullPath: '/testimonials'
+      preLoaderRoute: typeof TestimonialsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects/': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  TestimonialsRoute: TestimonialsRoute,
   ProjectsIdRoute: ProjectsIdRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
